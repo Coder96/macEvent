@@ -63,7 +63,7 @@
 				if($config['mac_' . $mMac]['debug']) writeLog("Found Mac:$mMac");
 				if($config['mac_' . $mMac]['active']){
 					if($config['mac_' . $mMac]['debug']) writeLog("Active Mac:$mMac");
-						$logFileName = date("omd") . '.txt';
+						$logFileName = date("omd") . '.log';
 					 	$cmd = 'nohup ' . $pgmBinDir . 'macEventWork.php ' . escapeshellarg($mMac) . ' 2>&1 >>' . $pgmLogDir . $logFileName . ' &';
 //					 	writeLog($cmd);
 					system($cmd);

@@ -8,7 +8,7 @@
 	
 	$pgmName = basename(__FILE__);
 	
-	$logFileName = date("omd") . '.txt';
+	$logFileName = date("omd") . '.log';
 	
 	$cmd = 'nohup ' . $pgmMqttClientSub . ' | ' . $pgmBinDir . 'macEventMain.php 2>&1 >>' . $pgmLogDir . $logFileName . ' &' ;#
 // 'nohup ' . 

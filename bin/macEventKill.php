@@ -8,19 +8,25 @@
 	
 	$pgmName = basename(__FILE__);
 	
-	$logFileName = date("omd") . '.txt';
+	$logFileName = ''. date("omd") . '.log';
 	
 	$cmd = 'nohup ' . $pgmMqttClientSub . ' | ' . $pgmBinDir . 'macEventMain.php 2>&1 >>' . $pgmLogDir . $logFileName . ' &' ;#
 
 	$ps = shell_exec("ps a -o pid,command | grep  ". escapeshellarg($pgmMqttClientSub) ." | grep -v 'grep'");
-	echo $ps.PHP_EOL;
+//	echo $ps.PHP_EOL;
+	
 	$ps = trim($ps);
-	list($mPid, $mCmd) = explode(" ", $ps, 2);
-	echo $mPid.PHP_EOL;
-	echo $mCmd.PHP_EOL;
-	
-	$ps = shell_exec('kill -9 '. escapeshellarg($mPid) );
-	
+	$pidList = explode(PHP_EOL, $ps);
+	foreach($pidList as $line){
+
+		$line = trim($line);
+		list($mPid, $mCmd) = explode(" ", $line, 2);
+		
+		writeLog('Killing:'.$line);
+
+		$ps = shell_exec('kill -9 '. escapeshellarg($mPid) );
+	}
+
 // 'nohup ' . 
 //	echo($cmd);
 //	exec($cmd);
